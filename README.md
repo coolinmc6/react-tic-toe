@@ -5,6 +5,12 @@ Source: [Github](https://facebook.github.io/react/tutorial/tutorial.html) |
 [CodePen Starter](https://codepen.io/ericnakagawa/pen/vXpjwZ?editors=0010) | 
 [CodePen Finished](https://s.codepen.io/ericnakagawa/debug/ALxakj)
 
+## What is React?
+
+- some good notes here, I should revisit
+
+## Getting Started
+
 - First step for me was to convert the one big index.jsx file into multiple component
 files
 - when converting, I have to remember to 'export default'.  Here is an example for
@@ -48,7 +54,7 @@ component, I won't have to import square.js into index.js, only into board.js
 
 - The tutorial starts with a blank tic-tac-toe board.  As a quick run-through, 
 there are three components; Game, Board and Square.
-- Game renders an encapsulating div.game which inside that is div.game-board which holds
+- Game renders an encapsulating div.game which has a div.game-board which holds
 the Board component.
 - Board renders an encapsulating div with a status div and three rows (div.board-row) and
 three Square components.
@@ -74,7 +80,7 @@ return <Square value={i} />;
 ## An Interactive Component
 
 - state is private to the component
-- we need to initialized it by creating a constructor function.
+- we need to initialize it by creating a constructor function.
 - we must call super() when defining the constructor of a subclass which Square is (it extends 
 or inherits from React.Component)
 ```javascript
@@ -88,9 +94,9 @@ or inherits from React.Component)
     {this.state.value}
 </button>
 ```
-- onClick function -> When we click on a square, we are setting state and setting 
+- onClick function -> When we click on a square, we are 'setting state' and setting 
 the value to 'X'.
-- To grab that value, we updated the contents of the box to this.state.value
+- To grab that value, we updated the contents of the box to `this.state.value`
 - Now, when we click on a box, it throws in an 'X'
 
 - *I now have React DevTools, I probably need to restart Chrome to get it working.*
@@ -103,14 +109,31 @@ component but that gets messy.  Instead, we can store state in the Board compone
 have Board simply tell each Square what to display
 - Going forward, if I have two sibling components that need to talk to each other, move 
 the state upwards and have it live in the parent component.
-- We added an initial state for the board by setting this.state equal to an array called
+- We added an initial state for the board by setting `this.state` equal to an array called
 'squares' with 9 items, defaulted to 'null'
-- In the renderSquare(i), we updated it so that the value that we're passing in is coming
-from the squares array which we access with {this.state.squares[i]}
+- In the `renderSquare(i)`, we updated it so that the value that we're passing in is coming
+from the squares array which we access with `{this.state.squares[i]}`
 - I needed to define the handleClick(i) function within the Board component
 - Note how whenever Board's state changes, the Square components rerender automatically.
 - Square no longer keeps its own state; it receives its value from its parent Board and 
 informs its parent when it's clicked. We call components like this controlled components.
+
+
+## Why Immutability Is Important
+
+## Functional Components
+
+## Taking Turns
+
+## Declaring a Winner
+
+## Storing a History
+
+## Showing the Moves
+
+## Implementing Time Travel
+
+
 
 
 
