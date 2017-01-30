@@ -118,10 +118,46 @@ from the squares array which we access with `{this.state.squares[i]}`
 - Square no longer keeps its own state; it receives its value from its parent Board and 
 informs its parent when it's clicked. We call components like this controlled components.
 
+### Quick Catch-Up
+- Three components: Game (index.js), Board, and Square
+- Board is the most complex and holds the state for the game.  It says where there is an 'X' or 'O' 
+while Square is just there to render it.
+- Board has a method called `renderSquare(i)` that returns a Square component.  It is passing down
+two props:
+  - the first is the value of the square `value={this.state.squares[i]}`
+  - and second is the handleClick method: `onClick={() => this.handleClick(i)}`
+    - CM => why isn't handleClick bound somewhere in the constructor?  I thought I'd see this line
+    of code somewhere: `this.handleClick = this.handClick.bind(this)`
+    - CM => and while we're on the constructor topic, which is it just `constructor()` and not
+    `constructor(props)`; same with `super()` and `super(props)`?  I've read somewhere about the 
+    difference but I don't remember....worth Googling.
+- Board has three divs with class 'board-row' and each one calls the renderSquare() method: 
+`{this.renderSquare(0)}` is for the top left square...so 0 through 8
+- renderSquare(i) requires an argument, which is the number of square or its place in the squares
+array which was initialized in the constructor with that nifty bit of code to create an array with
+9 places, all null
+- handleClick(i) also receives an argument `i`.  Instead of altering state directly, it creates a
+constant called squares, an array, is set equal to what is currently in my state: 
+`this.state.squares.slice()`
+  - I don't understand what 'slice' does for me.  It seems to work just fine as `this.state.squares`
+  when I console.log(squares).  When I console.log(this.state.squares) and the .slice() version is up, 
+  the arrays are different...it's like the this.state.squares is always behind one...
+  - they address this somewhat in the next section saying they recommend using the .slice() method
+  to copy state instead of mutating it...which would suggest to me that:
+  `(const squares = this.state.squares) !== (const squares = this.state.squares.slice()).  OK
+  - I think in the `const squares = this.state.squares` version, I am mutating state
 
 ## Why Immutability Is Important
+- Re-read this part on [tracking changes](https://facebook.github.io/react/tutorial/tutorial.html#tracking-changes).
+- the biggest benefit of immutability is that it is more easy to determine if the object has been
+changed or not
+- I should take a look at the immutable.js library
 
 ## Functional Components
+- We can now delete the constructor from Square.  Without state, we don't even need to define a whole 
+new class that extends the Component class, we can just create a stateless functional component
+- The biggest changes we did were #1 - the function takes an argument (props) and #2 - we must change
+the `this.props` to just `props`
 
 ## Taking Turns
 
